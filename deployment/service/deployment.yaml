@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ labels:
+   app: dse-on-k8s-with-java
+ name: dse-on-k8s-with-java
+spec:
+ replicas: 1
+ selector:
+   matchLabels:
+     app: dse-on-k8s-with-java
+ template:
+   metadata:
+     labels:
+       app: dse-on-k8s-with-java
+   spec:
+     containers:
+     - name: dse-on-k8s-with-java
+       image: dse-on-k8s-with-java:latest
+       imagePullPolicy: Never
+       ports:
+       - containerPort: 8080
+       env:
+       - name: USERNAME
+         valueFrom:
+           secretKeyRef:
+             name: cluster2-superuser
+             key: username
+       - name: PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: cluster2-superuser
+             key: password

@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+ labels:
+   app: dse-on-k8s-with-java
+ name: dse-on-k8s-with-java
+spec:
+ ports:
+   - name: 'http'
+     port: 8080
+     targetPort: 8080
+ selector:
+   app: dse-on-k8s-with-java
+ type: ClusterIP
